@@ -1,0 +1,115 @@
+@import "mixins.scss";
+
+.about {
+  background-image: url("https://images.prismic.io/tvtime-site%2Fda8e7f69-b081-4c72-afc8-258461b4584e_about-posters-bg.jpg?auto=compress,format&rect=0,0,1868,1641&w=1868&h=1641");
+  min-height: 90vh;
+  @include flex();
+
+
+  &__content {
+    background-color: firebrick;
+    width: 70%;
+
+    &__wrapper {
+      display: flex;
+    }
+
+    &__wrapper h2 {
+      font-size: 32px;
+      margin: 10px;
+    }
+
+    & img {
+      width: 340px;
+    }
+
+    & p {
+      margin: 0;
+      padding: 0;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    & a {
+      color: red;
+    }
+
+    &__nav {
+      transform: skewY(2deg);
+      transform-origin: 0px 0px;
+      height: 115px;
+      width: 100%;
+      background-color: firebrick;
+      @include flex();
+
+    }
+
+    &__nav span {
+      text-decoration: line-through;
+    }
+
+    &__nav h2 {
+      transform: skewY(-2deg);
+      text-transform: uppercase;
+    }
+
+    &__info,
+    &__contact {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding: 10px 10px 20px 10px;
+      font-size: 28px;
+      width: 100%;
+    }
+
+    &__info {
+      background-color: white;
+    }
+
+    &__contact {
+      background-color: #171717;
+      color: white;
+    }
+  }
+
+  .about__links {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 60px;
+    flex-wrap: wrap;
+
+
+    & img {
+      width: 80px;
+      height: 80px;
+    }
+
+    & a {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width:1050px) {
+    .about__content {
+      width: 100%;
+    }
+  }
+
+  @media (max-width:738px) {
+    .about__content__wrapper {
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width:350px) {
+    .about__content img {
+      width: 300px;
+    }
+
+    .about__links a {
+      padding: 10px;
+    }
+  }
+}

@@ -1,0 +1,281 @@
+@import "mixins.scss";
+
+
+.dashboard {
+    min-height: 100vh;
+    display: flex;
+    border-bottom: 1px solid gray;
+
+    &__info {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        flex-direction: column;
+        border-bottom: 2px solid gray;
+        min-width: 25%;
+        padding: 20px;
+        background-image: url("/img/graffiti.jpg");
+    }
+
+    &__details {
+        font-size: 26px;
+        @include flex();
+        flex-direction: column;
+        flex-wrap: wrap;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.6);
+        border: 2px solid black;
+        max-width: 100%;
+        min-width: 80%;
+        text-align: center;
+        padding: 10px;
+        position: relative;
+        overflow-wrap: anywhere;
+
+
+        & span {
+            color: #ed213a;
+            text-align: center;
+        }
+    }
+
+    &__image__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px 0px 10px 0px;
+
+
+        & img {
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            height: 150px;
+            width: 150px;
+            margin-bottom: 10px;
+        }
+    }
+
+    &__watchtime {
+        width: 100%;
+        height: 150px;
+        background: #353535;
+        color: #fff;
+        position: relative;
+        padding: 20px;
+        box-sizing: border-box;
+        margin: 0;
+        padding-top: 10px;
+        display: flex;
+        align-items: center;
+
+
+        &__totals {
+            @include flex();
+        }
+    }
+
+    &__logout__button {
+        font-size: 24px;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: white;
+        border: 1px solid black;
+        cursor: pointer;
+        position: absolute;
+        top: -10px;
+        right: -14px;
+
+
+        &:hover {
+            background-color: lightgray;
+            transition: .6s;
+        }
+    }
+
+    &__change__button {
+        padding: 10px;
+        border-radius: 20px;
+        font-size: 18px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border: 1px solid black;
+
+
+        &:hover {
+            background-color: lightgray;
+            transition: .6s;
+        }
+    }
+
+    &__series {
+        width: 100%;
+    }
+
+    &__name__info {
+        @include flex();
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+}
+
+.modal {
+    background-color: white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 50px;
+    z-index: 1000;
+
+
+
+    &__img {
+        cursor: pointer;
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+
+
+        &:hover {
+            border: 2px solid green;
+        }
+    }
+
+    &__overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, .7);
+        z-index: 1000;
+    }
+
+    &__img__container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    &__buttons {
+        @include flex();
+        padding: 10px;
+        margin-top: 15px;
+    }
+
+    &__btn {
+        font-weight: 600;
+        border: solid 2px black;
+        outline: 0;
+        padding: 1rem 3rem;
+        font-size: 1.5rem;
+        letter-spacing: .08rem;
+        background-color: white;
+        border-radius: .35rem;
+        position: relative;
+        cursor: pointer;
+        margin: 0px 15px 15px 0px;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: green;
+            z-index: -1;
+            border-radius: .35rem;
+            border: solid 2px black;
+            transition: all .3s ease-in-out;
+        }
+
+
+        &:hover::after {
+            width: 100%;
+            height: 100%;
+            top: .5rem;
+            left: .5rem;
+        }
+    }
+
+    &__cancelBtn::after {
+        background-color: red;
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .dashboard {
+        flex-wrap: wrap;
+        position: relative;
+
+        &__details {
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        &__info {
+            width: 100%;
+            flex-direction: row;
+            justify-content: center;
+        }
+
+        &__logout {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    }
+
+    .modal {
+        min-width: 80%;
+
+        &__btn {
+            padding: 1rem 2rem;
+        }
+    }
+}
+
+@media (max-width: 624px) {
+    .modal {
+        padding: 30px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+
+        &__img {
+            height: 80px;
+            width: 80px;
+        }
+    }
+
+}
+
+@media (max-width: 926px) and (orientation: landscape) {
+    .modal {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+
+        &__img {
+            height: 75px;
+            width: 75px;
+        }
+
+        &__btn {
+            padding: 1rem;
+        }
+    }
+}
+
+.auth {
+    @include flex();
+    min-height: 83vh;
+}

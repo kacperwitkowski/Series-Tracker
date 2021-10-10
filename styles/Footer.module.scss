@@ -1,0 +1,17 @@
+@import "mixins.scss";
+
+.footer {
+  background: black;
+  padding: 3px;
+
+  &__p {
+    @include flex();
+    margin: 0px;
+    color: white;
+
+    & a {
+      margin-left: 0.3rem;
+      color: firebrick;
+    }
+  }
+}

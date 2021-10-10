@@ -1,0 +1,85 @@
+.navbar {
+ padding: 1rem;
+ background: #171717;
+
+&__logo {
+ width: 100px;
+ height: 100px;
+}
+
+&__nav {
+ display: flex;
+ justify-content: space-between; 
+ align-items: center;
+ flex-wrap: wrap;
+}
+
+& span {
+  background: linear-gradient(to top, #ed213a, #93291e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+& a {
+  background: linear-gradient(to top, #ed213a, #93291e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+&__brand {
+& a {
+ display: flex;
+ align-items: center;
+}
+
+& span {
+ font-family: fantasy,sans-serif;
+ font-size: 40px;
+}
+}
+
+
+&__linksContainer {
+ display: flex;
+ list-style: none;
+ align-items: center;
+ 
+ & a{
+   display: block;
+   padding: 1rem;
+   text-decoration: none;
+   margin-left: 0.5rem;
+   font-size: 24px;
+   text-transform: uppercase;
+   font-family: cursive,sans-serif;
+  }
+}
+  
+  @media (max-width:750px) {
+&__nav {
+justify-content: space-around;
+}
+}
+
+@media (max-width: 420px) {
+  &__logo {
+ width: 80px;
+ height: 80px;
+}
+
+&__brand span{
+  font-size: 30px;
+}
+
+&__linksContainer a {
+  font-size: 20px;
+  margin-left: 0;
+}
+}
+}
+
+.container {
+max-width: 1920px;
+margin: auto;
+}

@@ -1,0 +1,22 @@
+.scroll {
+ &__visible {
+ display: block;
+ transition-property: opacity;
+ transition-timing-function: cubic-bezier(0.4,0,0.2,1);
+ transition-duration: 158ms;
+ position: fixed;
+ bottom: 15px;
+ right: 7px;
+ background-color: #171717;
+ padding: 10px;
+ border: 1px solid #ed213a;
+ cursor:pointer;
+ font-size: 20px;
+ z-index: 2;
+ }
+
+ 
+ &__notVisible {
+ display: none;
+ }
+}

@@ -1,0 +1,199 @@
+@import "mixins.scss";
+
+.showpage {
+  min-height: 83vh;
+
+
+  &__info {
+    margin: 2rem 0 0 0;
+  }
+
+  &__container {
+    padding: 40px 20px;
+    background-image: url("/img/cinema.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__name {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+
+  &>img {
+    margin-right: 2rem;
+  }
+
+  .spinner img {
+    display: block;
+    margin: 2rem auto;
+  }
+
+  &__nav {
+    width: 100%;
+    height: 50px;
+    background: #353535;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  &__image__name img {
+    width: 350px;
+    height: 100%;
+    max-width: 100%;
+    transition: all 0.3s;
+    object-fit: cover;
+  }
+
+  &__details {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100%;
+    padding: 40px;
+    color: #fff;
+    max-width: 1280px;
+    width: 60%;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: relative;
+  }
+
+
+  &__button {
+    position: relative;
+    font-family: sans-serif;
+    font-size: 20px;
+    margin: 10px 0px 10px 0px;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    box-shadow: 0 2px 0 #000;
+    transition: padding 0.1s, box-shadow 0.1s, top 0.1s;
+    background-color: gray;
+    cursor: pointer;
+
+
+    & span {
+      background: #FFF;
+      display: block;
+      padding: 5px 15px;
+      border-radius: 5px;
+      border: 2px solid #000;
+    }
+
+
+    &:hover {
+      box-shadow: 0 2px 0 #000, 0 2px 0px 2px #f03755;
+    }
+
+    &:active {
+      top: 4px;
+      padding-bottom: 0px;
+      box-shadow: 0 1px 0 #000;
+    }
+  }
+
+  &__details {
+    & h1 {
+      font-family: 'Abel', sans-serif;
+      font-size: 48px;
+      margin: 0;
+    }
+
+    & a {
+      text-transform: uppercase;
+      color: #FF0000;
+      text-decoration: underline;
+    }
+
+    & p {
+      font-family: 'Abel', sans-serif;
+      font-size: 18px;
+      line-height: 26px;
+    }
+  }
+
+
+  &__name__plot {
+    font-size: 16px;
+    line-height: 0;
+    margin-top: 30px;
+  }
+
+
+  &__stars {
+    @include flex();
+    flex-wrap: wrap;
+    flex-direction: column;
+
+
+    & h2 {
+      margin: 20px 0px 0px 0px;
+    }
+
+    &__container {
+      @include flex();
+      flex-wrap: wrap;
+    }
+  }
+
+  &__name__span {
+    @include flex();
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  &__score {
+    margin: 15px;
+    border-radius: 50%;
+    border: 3px solid red;
+    padding: 10px;
+    @include flex();
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+  }
+
+  @media (max-width: 1024px) {
+    &__container {
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0px 0px 0px;
+    }
+
+    &__details {
+      width: 100%;
+      text-align: center;
+    }
+
+    &__name {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 423px) {
+
+    &__details {
+      padding: 15px;
+    }
+
+    &__image__name img {
+      width: 300px;
+    }
+  }
+}
+
+.star {
+  display: flex;
+  cursor: pointer;
+}

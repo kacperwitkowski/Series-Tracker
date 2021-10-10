@@ -1,0 +1,144 @@
+.homepage {
+
+  &__list {
+    min-height: 78vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    background-size: cover;
+    background-position: bottom;
+    background-image: url("/img/graffiti.jpg");
+  }
+
+  &__blank {
+    min-height: 70vh;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    display: flex;
+  }
+
+  &__blank__modal {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-family: "DJGROSS", sans-serif;
+    font-size: 50px;
+  }
+
+  &__paint {
+    display: flex;
+    align-items: center;
+  }
+
+  &__paint button {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border: 5px solid black;
+    margin: 0 10px 0 10px;
+  }
+
+  &__paint p {
+    font-family: "DJGROSS", sans-serif;
+    font-size: 30px;
+    color: black;
+    border-bottom: 3px groove black;
+  }
+
+  @media (max-width:1024px) {
+    &__list {
+      background-size: auto;
+      background-position: unset;
+    }
+  }
+
+  @media (max-width:680px) {
+    &__paint {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    &__paint ul {
+      padding: 0;
+    }
+
+    &__blank__modal {
+      font-size: 45px;
+    }
+
+    &__blank {
+      align-content: space-between;
+    }
+  }
+
+
+  @media (max-width: 420px) {
+    &__paint p {
+      font-size: 23px;
+    }
+
+    &__blank__modal {
+      font-size: 35px;
+    }
+  }
+}
+
+
+.searchbar {
+  width: 100%;
+  height: 105px;
+  background: radial-gradient(gray, transparent);
+  position: relative;
+  padding: 25px 20px 0px 20px;
+  box-sizing: border-box;
+  color: #fff;
+
+
+  &>input {
+    font-family: 'Abel', sans-serif;
+    font-size: 28px;
+    border: 0;
+    border-radius: 40px;
+    background: transparent;
+    color: #fff;
+    width: 100%;
+    background: #353535;
+    height: 55px;
+    top: 0;
+    padding-left: 10px;
+  }
+
+  &>input:focus {
+    box-shadow: 0px 0px 0px 1px #ed213a;
+    outline: none;
+  }
+
+  &__btn {
+    font-size: 38px;
+    background: transparent;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0;
+    height: 100%;
+    margin-right: 26px;
+  }
+}
+
+.alert {
+  padding: 10px 17px;
+  border: 1px solid black;
+  margin: 1rem auto;
+  background: firebrick;
+  text-transform: uppercase;
+  font-size: 18px;
+  width: 95%;
+  color: white;
+}

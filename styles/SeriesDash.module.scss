@@ -1,0 +1,40 @@
+@import "mixins.scss";
+
+.series {
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+
+    &__wrapper {
+        width: 100%;
+    }
+
+    &__info {
+        position: relative;
+
+        & img {
+            cursor: pointer;
+        }
+    }
+
+    &__time__count {
+        @include flex();
+        text-align: center;
+    }
+
+    &__delete__btn {
+        position: absolute;
+        top: 25px;
+        right: 30px;
+        color: white;
+        cursor: pointer;
+        font-size: 28px;
+        background-color: red;
+    }
+
+
+    &__h1 a {
+        color: red;
+    }
+}

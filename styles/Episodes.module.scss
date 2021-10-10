@@ -1,0 +1,77 @@
+@import "mixins.scss";
+
+.episodes {
+ height: 100%;
+ width: 100%;
+
+
+ &__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+ }
+
+ &__seasons__container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+ }
+
+ &__summary__container {
+  display: flex;
+
+  & img {
+   height: 157px;
+   object-fit: cover;
+   object-position: top;
+  }
+ }
+
+ &__singleEpisode__title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 280px;
+  justify-content: space-around;
+  min-height: 150px;
+  text-align: center;
+
+
+  & button {
+   border: none;
+   border-top: 1px dashed black;
+   color: firebrick;
+   width: 100%;
+   background: none;
+   cursor: pointer;
+  }
+
+  & h2 {
+   margin: 0px 20px 0px 10px;
+  }
+ }
+
+ &__singleEpisode {
+  border: 2px solid black;
+  margin: 0px 10px 10px 10px;
+  height: auto;
+ }
+}
+
+.singleSeason {
+ background-color: #ed213a;
+ color: white;
+ cursor: pointer;
+ padding: 15px;
+ @include flex();
+ margin: 1rem 0rem 1rem 0rem;
+
+ & button {
+  margin-left: 10px;
+  color: black;
+  background-color: white;
+  font-size: 20px;
+  cursor: pointer;
+ }
+}
