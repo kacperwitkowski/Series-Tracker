@@ -11,7 +11,7 @@ import { useUser } from "../firebase/useUser";
 export default function Home() {
   const [searched, setSearched] = useState("");
   const { shows, searchShows, loading } = useContext(AppContext);
-  const { user  } = useUser();
+  const { user } = useUser();
 
   const { alert, setAlert } = useContext(AlertsContext);
 
@@ -20,8 +20,11 @@ export default function Home() {
 
   const searchHandler = (e) => {
     e.preventDefault();
-    if (searched === "") {setAlert("Please enter something", "danger")}
-    else {searchShows(searched)};
+    if (searched === "") {
+      setAlert("Please enter something", "danger");
+    } else {
+      searchShows(searched);
+    }
   };
 
   return (
@@ -44,6 +47,24 @@ export default function Home() {
             &#x1F50E;
           </button>
         </form>
+
+        {/* <div className={styles.custom__search}>
+          <input
+            className={styles.custom__search__input}
+            type="text"
+            placeholder="Type in show.."
+            value={searched}
+            onChange={(e) => setSearched(e.target.value)}
+          />
+          <button
+            className={styles.custom__search__botton}
+            type="submit"
+            onClick={searchHandler}
+          >
+            &#x1F50E;
+          </button>
+        </div> */}
+
         {loading ? (
           <Spinner />
         ) : (
