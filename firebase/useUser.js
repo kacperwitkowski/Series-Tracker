@@ -21,7 +21,7 @@ const useUser = () => {
       .auth()
       .signOut()
       .then(() => {
-        router.push("/auth");
+        router.push("/");
       })
       .catch((e) => {
         console.error(e);

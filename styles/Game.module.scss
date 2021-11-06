@@ -1,0 +1,244 @@
+.game {
+ min-height: 90vh;
+ margin: 40px auto;
+
+ &__cards {
+  margin-top: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+ }
+
+
+ &__card {
+  position: relative;
+  margin: 10px;
+
+
+  & img {
+   width: 210px;
+   display: block;
+   border: 2px solid black;
+   border-radius: 6px;
+  }
+
+
+  & &__front {
+   transform: rotateY(90deg);
+   position: absolute;
+   transition: all ease-in .2s;
+   object-fit: cover;
+
+  }
+
+  & &__back {
+   transition: all ease-in .2s;
+   transition-delay: .2s;
+   cursor: pointer;
+  }
+
+ }
+
+
+ &__flipped {
+
+  & .game__card__front {
+   transform: rotateY(0deg);
+   transition-delay: .2s;
+   object-fit: cover;
+  }
+
+  & .game__card__back {
+   transform: rotateY(90deg);
+   transition-delay: 0s;
+  }
+ }
+
+ &__content {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: center;
+
+  & img {
+   width: 210px;
+   margin: 10px;
+   cursor: pointer;
+   border-radius: 6px;
+  }
+ }
+
+ &__rules {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+
+  & p {
+   font-size: 20px;
+  }
+ }
+
+ &__images {
+  position: relative;
+  margin: 10px;
+ }
+
+ &__start {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0px 20px 0px 20px;
+  font-size: 26px;
+
+  &__info {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   text-transform: uppercase;
+   margin-top: 20px;
+  }
+ }
+
+ &__button {
+  border-radius: 20px;
+  border: 3px solid green;
+  background: transparent;
+  padding: 10px;
+  color: green;
+  text-transform: uppercase;
+  transition: all .5s;
+  cursor: pointer;
+
+  &:hover {
+   background-color: green;
+   color: white;
+  }
+
+  &:disabled {
+   border-color: gray;
+   color: gray;
+
+   &:hover {
+    background-color: transparent;
+   }
+  }
+ }
+
+ .game__restart {
+  border-color: firebrick;
+
+  &:hover {
+   background-color: firebrick;
+   color: white;
+  }
+ }
+
+
+ &__themeSwitcher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & span {
+   font-size: 38px;
+  }
+ }
+
+ &__switchCheckbox {
+  padding: 10px;
+
+
+  &__label {
+   position: relative;
+   display: inline-block;
+   width: 60px;
+   height: 14px;
+   height: 34px;
+  }
+ }
+
+ &__moon {
+  border: 2px solid #c96dfd;
+  box-shadow: rgb(201 109 253) 5px 1px 17px 0px;
+  border-radius: 6px;
+ }
+
+ &__sun {
+  border: 2px solid orange;
+  box-shadow: orange 5px 1px 17px 0px;
+  border-radius: 6px;
+ }
+
+ &__slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+
+  &:before {
+   position: absolute;
+   content: "";
+   height: 26px;
+   width: 26px;
+   left: 4px;
+   bottom: 4px;
+   background-color: white;
+   -webkit-transition: 0.4s;
+   transition: 0.4s;
+  }
+
+  input:checked+& {
+   background-color: purple;
+  }
+
+  input:checked+&:before {
+   transform: translateX(26px);
+  }
+ }
+
+ &__round {
+  border-radius: 34px;
+
+
+  &:before {
+   border-radius: 50%;
+  }
+ }
+
+ &__selectColor {
+  margin: 10px;
+  filter: drop-shadow(16px 16px 10px green)
+ }
+
+ &__unselectColor {
+  margin: 10px;
+ }
+
+ @media (max-width: 650px) {
+  &__start {
+   flex-direction: column;
+  }
+ }
+
+
+ @media (max-width: 540px) {
+
+  &__content img,
+  &__cards img {
+   margin: 10px;
+   width: 150px;
+   height: 220px;
+   margin: 0px;
+  }
+
+  &__rules {
+   width: 100%;
+  }
+ }
+}

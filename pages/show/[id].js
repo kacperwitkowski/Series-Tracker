@@ -39,27 +39,28 @@ const ShowDetails = () => {
 
   useEffect(() => {
     let isCancelled = false;
+    if (!isCancelled) {
+      let starsSr = JSON.parse(localStorage.getItem("stars") || "[]");
 
-    let starsSr = JSON.parse(localStorage.getItem("stars") || "[]");
+      if (id === null && rating === 0) return;
 
-    if (id === null && rating === 0) return;
+      if (starsSr.find((el) => el.id === id)) {
+        starsSr.push({ id: id, rating: rating });
+        let element = starsSr.find((el) => el.id === id);
+        let elToDelete = starsSr.indexOf(element);
+        starsSr.splice(elToDelete, 1);
 
-    if (starsSr.find((el) => el.id === id)) {
-      starsSr.push({ id: id, rating: rating });
-      let element = starsSr.find((el) => el.id === id);
-      let elToDelete = starsSr.indexOf(element);
-      starsSr.splice(elToDelete, 1);
-
-      localStorage.setItem("stars", JSON.stringify(starsSr));
-      firebase
-        .firestore()
-        .collection("Ratings")
-        .doc(user.id)
-        .set({ starsRatings: starsSr });
-    } else {
-      starsSr.push({ id: id, rating: rating });
-      localStorage.setItem("stars", JSON.stringify(starsSr));
-      sendRating();
+        localStorage.setItem("stars", JSON.stringify(starsSr));
+        firebase
+          .firestore()
+          .collection("Ratings")
+          .doc(user.id)
+          .set({ starsRatings: starsSr });
+      } else {
+        starsSr.push({ id: id, rating: rating });
+        localStorage.setItem("stars", JSON.stringify(starsSr));
+        sendRating();
+      }
     }
 
     return () => {
@@ -71,13 +72,15 @@ const ShowDetails = () => {
 
   useEffect(() => {
     let isCancelled = false;
-    fetch(`https://api.tvmaze.com/shows/${router.query.id}/episodes`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (!isCancelled) {
-          setEpisodes(data.length);
-        }
-      });
+    if (!isCancelled) {
+      fetch(`https://api.tvmaze.com/shows/${router.query.id}/episodes`)
+        .then((response) => response.json())
+        .then((data) => {
+          if (!isCancelled) {
+            setEpisodes(data.length);
+          }
+        });
+    }
     return () => {
       isCancelled = true;
     };
@@ -101,10 +104,11 @@ const ShowDetails = () => {
   }
   useEffect(() => {
     let isCancelled = false;
-
-    let starsSr = JSON.parse(localStorage.getItem("stars") || "[]");
-    let lol = starsSr.find((el) => el.id === id);
-    lol ? setRating(lol.rating) : "";
+    if (!isCancelled) {
+      let starsSr = JSON.parse(localStorage.getItem("stars") || "[]");
+      let lol = starsSr.find((el) => el.id === id);
+      lol ? setRating(lol.rating) : "";
+    }
 
     return () => {
       isCancelled = true;

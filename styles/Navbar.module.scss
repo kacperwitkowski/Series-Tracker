@@ -56,13 +56,13 @@
   }
 }
   
-  @media (max-width:750px) {
+  @media (max-width:820px) {
 &__nav {
 justify-content: space-around;
 }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 450px) {
   &__logo {
  width: 80px;
  height: 80px;
@@ -77,8 +77,13 @@ justify-content: space-around;
   margin-left: 0;
 }
 }
-}
 
+@media (max-width: 330px) {
+&__linksContainer a {
+  padding: .5rem;
+}
+}
+}
 .container {
 max-width: 1920px;
 margin: auto;

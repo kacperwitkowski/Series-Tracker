@@ -47,24 +47,6 @@ export default function Home() {
             &#x1F50E;
           </button>
         </form>
-
-        {/* <div className={styles.custom__search}>
-          <input
-            className={styles.custom__search__input}
-            type="text"
-            placeholder="Type in show.."
-            value={searched}
-            onChange={(e) => setSearched(e.target.value)}
-          />
-          <button
-            className={styles.custom__search__botton}
-            type="submit"
-            onClick={searchHandler}
-          >
-            &#x1F50E;
-          </button>
-        </div> */}
-
         {loading ? (
           <Spinner />
         ) : (

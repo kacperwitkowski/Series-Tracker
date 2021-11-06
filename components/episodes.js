@@ -79,6 +79,7 @@ const Episodes = ({ id }) => {
                 ) : (
                   ""
                 )}
+                <p>Airdate: {ep.airdate ? ep.airdate : "No data"}</p>
               </div>
             </div>
           ) : (

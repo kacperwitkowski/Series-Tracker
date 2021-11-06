@@ -15,10 +15,17 @@
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+
+  & div {
+   width: 150px;
+  }
  }
 
  &__summary__container {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   & img {
    height: 157px;

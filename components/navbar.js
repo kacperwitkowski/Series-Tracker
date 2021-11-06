@@ -21,6 +21,9 @@ const Navbar = () => {
               <Link href="/about">
                 <a>About</a>
               </Link>
+              <Link href="/game">
+                <a>Game</a>
+              </Link>
               <Link href={user ? "/dashboard" : "/auth"}>
                 <a>{user ? "Dashboard" : "Login"}</a>
               </Link>

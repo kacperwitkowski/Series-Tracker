@@ -69,7 +69,6 @@ const ReadDataFromCloudFirestore = () => {
       </>
     );
   };
-
   return (
     <div className={styles.series__wrapper}>
       <div className={styles.series__time__count}>{time_convert(time)}</div>
