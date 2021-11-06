@@ -9,23 +9,23 @@ const ProfilePicChange = () => {
   const { user } = useUser();
 
   useEffect(() => {
-  if (user) {
-    firebase
-      .firestore()
-      .collection("Avatars")
-      .doc(user.id)
-      .get()
-      .then((snapshot) => {
-        let data = snapshot.data();
-        if (data === undefined) {
-          return;
-        } else {
-          localStorage.setItem("avatar", data.data);
-          setPicture(data.data);
-        }
-      });
-  }
-  },[[]])
+    if (user) {
+      firebase
+        .firestore()
+        .collection("Avatars")
+        .doc(user.id)
+        .get()
+        .then((snapshot) => {
+          let data = snapshot.data();
+          if (data === undefined) {
+            return;
+          } else {
+            localStorage.setItem("avatar", data.data);
+            setPicture(data.data);
+          }
+        });
+    }
+  }, [[]]);
 
   const avatars = [
     "Lucifer.jpg",
