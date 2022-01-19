@@ -148,15 +148,18 @@
   }
 }
 
-
-
 .alert {
   padding: 10px 17px;
   border: 1px solid black;
-  margin: 1rem auto;
+  text-align: center;
   background: firebrick;
   text-transform: uppercase;
   font-size: 18px;
-  width: 95%;
+  width: 60%;
+  margin: 0 auto;
   color: white;
+
+  @media (max-width:600px) {
+    width: 100%;
+  }
 }

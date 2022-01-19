@@ -163,7 +163,7 @@ const Rankings = () => {
                   d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
                 />
               </defs>
-              <g className={styles.parallax}>
+              <g className={styles.waves__parallax}>
                 <use
                   xlinkHref="#gentle-wave"
                   x="48"
@@ -187,34 +187,34 @@ const Rankings = () => {
             </svg>
           </div>
         </div>
-        <div className={styles.content}>
+        <div className={styles.waves__content}>
           <p>Trending</p>
         </div>
-        <div className={styles.ranking}>
+        <div className={styles.stats__trending}>
           {ranking
             ? ranking.map((el, i) => (
                 <div style={{ position: "relative" }}>
                   <p style={{ textAlign: "center" }}>{el.original_name}</p>
                   {i === 0 && (
                     <img
-                      className={styles.ranking__medal}
+                      className={styles.stats__trending__medal}
                       src="/svg/goldmedal.svg"
                     />
                   )}
                   {i === 1 && (
                     <img
-                      className={styles.ranking__medal}
+                      className={styles.stats__trending__medal}
                       src="/svg/silvermedal.svg"
                     />
                   )}
                   {i === 2 && (
                     <img
-                      className={styles.ranking__medal}
+                      className={styles.stats__trending__medal}
                       src="/svg/bronzemedal.svg"
                     />
                   )}
                   {i !== 0 && i !== 1 && i !== 2 && (
-                    <div className={styles.ranking__others}>{i + 1}</div>
+                    <div className={styles.stats__trending__others}>{i + 1}</div>
                   )}
                   <img
                     style={{ position: "relative" }}
