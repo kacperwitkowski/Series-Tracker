@@ -1,5 +1,5 @@
 import Head from "next/dist/next-server/lib/head";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import Alert from "../components/alert";
 import AlertsContext from "../components/context/Alerts/alertsContext";
 import AppContext from "../components/context/Shows/showsContext";
@@ -7,15 +7,16 @@ import ListShowsView from "../components/listShowsView";
 import Spinner from "../components/spinner";
 import styles from "../styles/Home.module.scss";
 import { useUser } from "../firebase/useUser";
+import Scroll from "../components/scroll";
 
 export default function Home() {
   const [searched, setSearched] = useState("");
   const { shows, searchShows, loading } = useContext(AppContext);
   const { user } = useUser();
-
   const { alert, setAlert } = useContext(AlertsContext);
+  const [rerenderShows, setRerenderShows] = useState(false);
 
-  const colors = ["black", "darkslateblue", "darkred"];
+  const colors = ["black", "indigo", "darkred"];
   const [defaultColor, setDefaultColor] = useState("black");
 
   const searchHandler = (e) => {
@@ -27,6 +28,10 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    setRerenderShows(!rerenderShows);
+  }, []);
+
   return (
     <>
       <Head>
@@ -36,17 +41,20 @@ export default function Home() {
       <div className={styles.homepage}>
         {alert ? <Alert msg="Please enter something" type={alert.type} /> : ""}
         <form className={styles.searchbar}>
-          <input
-            type="text"
-            className={styles.searchbar__input}
-            placeholder="Type in show.."
-            value={searched}
-            onChange={(e) => setSearched(e.target.value)}
-          />
-          <button className={styles.searchbar__btn} onClick={searchHandler}>
-            &#x1F50E;
-          </button>
+          <div className={styles.searchbar__div}>
+            <input
+              type="text"
+              className={styles.searchbar__input}
+              placeholder="Type in show.."
+              value={searched}
+              onChange={(e) => setSearched(e.target.value)}
+            />
+            <button className={styles.searchbar__btn} onClick={searchHandler}>
+              &#x1F50E;
+            </button>
+          </div>
         </form>
+
         {loading ? (
           <Spinner />
         ) : (
@@ -108,6 +116,7 @@ export default function Home() {
             )}
           </div>
         )}
+        <Scroll />
       </div>
     </>
   );

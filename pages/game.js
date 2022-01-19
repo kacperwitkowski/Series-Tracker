@@ -162,9 +162,11 @@ const Game = () => {
         >
           <a href="/game">&#11013; Select other cards</a>
           <div className={styles.game__start__info}>
-            <button className={`${styles.game__button} ${styles.game__restart}`} 
-            style={darkTheme ? {color: "#999"} : {color: "black"}}
-            onClick={gameFunctionality}>
+            <button
+              className={`${styles.game__button} ${styles.game__restart}`}
+              style={darkTheme ? { color: "#999" } : { color: "black" }}
+              onClick={gameFunctionality}
+            >
               Restart the Game
             </button>
             <p>Turns: {turns}</p>

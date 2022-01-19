@@ -106,7 +106,9 @@
   border: 3px solid green;
   background: transparent;
   padding: 10px;
-  color: green;
+  color: white;
+  background-color: green;
+  border-color: lightblue;
   text-transform: uppercase;
   transition: all .5s;
   cursor: pointer;
@@ -119,6 +121,7 @@
   &:disabled {
    border-color: gray;
    color: gray;
+   background-color: white;
 
    &:hover {
     background-color: transparent;
@@ -128,6 +131,7 @@
 
  .game__restart {
   border-color: firebrick;
+  background-color: white;
 
   &:hover {
    background-color: firebrick;

@@ -1,0 +1,181 @@
+.stats {
+ display: flex;
+ position: relative;
+ text-align: center;
+ background: #333333;
+ background: -webkit-linear-gradient(to bottom, #dd1818, #333333);
+ background: linear-gradient(to bottom, #dd1818, #333333);
+
+ color: white;
+ flex-direction: column;
+}
+
+.stats__container {
+ min-height: 300px;
+ display: flex;
+ flex-wrap: wrap;
+ align-items: center;
+ justify-content: space-between;
+ padding: 10px;
+}
+
+.stats__container__div {
+ width: 20%;
+ height: 300px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: row-reverse;
+ flex-wrap: wrap;
+}
+
+.testowanie {
+ background-image: url(/svg/wave.svg);
+ height: 100px;
+}
+
+.stats__container__div p {
+ margin: 0px;
+ text-align: center;
+ font-size: 20px;
+ text-transform: uppercase;
+ color: black;
+}
+
+
+.stats__container__div:first-child img {
+ border-radius: 50%;
+ object-fit: cover;
+ display: block;
+ z-index: 10;
+ margin-bottom: 10px;
+}
+
+.stats__container__div img {
+ object-fit: cover;
+ display: block;
+ height: 120px;
+ width: 120px;
+}
+
+.ranking {
+ display: flex;
+ flex-wrap: wrap;
+ justify-content: center;
+ background-color: white;
+}
+
+.ranking__medal {
+ height: 100px;
+ width: 100px;
+ top: 20px;
+ position: absolute;
+ z-index: 2;
+}
+
+.ranking__others {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 60px;
+ width: 60px;
+ border-radius: 50%;
+ z-index: 2;
+ top: 25px;
+ left: 20px;
+ color: white;
+ position: absolute;
+ background-color: black;
+}
+
+//moze
+
+
+.waves {
+ position: relative;
+ width: 100%;
+ height: 15vh;
+ margin-bottom: -7px;
+ min-height: 100px;
+ max-height: 150px;
+}
+
+.content {
+ position: relative;
+ height: 20vh;
+ text-align: center;
+ background-color: white;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ text-align: center;
+ color: black;
+ font-size: 34px;
+ text-transform: uppercase;
+}
+
+/* Animation */
+
+.parallax>use {
+ animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+ animation-delay: -2s;
+ animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+ animation-delay: -3s;
+ animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+ animation-delay: -4s;
+ animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+ animation-delay: -5s;
+ animation-duration: 20s;
+}
+
+@keyframes move-forever {
+ 0% {
+  transform: translate3d(-90px, 0, 0);
+ }
+
+ 100% {
+  transform: translate3d(85px, 0, 0);
+ }
+}
+
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+ .waves {
+  height: 40px;
+  min-height: 40px;
+ }
+
+ .content {
+  height: 30vh;
+ }
+
+
+
+ .stats__container__div {
+  width: 50%;
+ }
+
+}
+
+@media (max-width: 450px) {
+ .stats__container {
+  flex-direction: column;
+ }
+
+ .stats__container__div {
+  width: 100%;
+ }
+
+}

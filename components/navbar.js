@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from '../styles/Navbar.module.scss';
+import styles from "../styles/Navbar.module.scss";
 import { useUser } from "../firebase/useUser";
 
 const Navbar = () => {
@@ -18,15 +18,18 @@ const Navbar = () => {
             </Link>
           </div>
           <div className={styles.navbar__linksContainer}>
-              <Link href="/about">
-                <a>About</a>
-              </Link>
-              <Link href="/game">
-                <a>Game</a>
-              </Link>
-              <Link href={user ? "/dashboard" : "/auth"}>
-                <a>{user ? "Dashboard" : "Login"}</a>
-              </Link>
+            <Link href="/about">
+              <a>About</a>
+            </Link>
+            <Link href="/rankings">
+              <a>Rankings</a>
+            </Link>
+            <Link href="/game">
+              <a>Game</a>
+            </Link>
+            <Link href={user ? "/dashboard" : "/auth"}>
+              <a>{user ? "Dashboard" : "Login"}</a>
+            </Link>
           </div>
         </nav>
       </div>

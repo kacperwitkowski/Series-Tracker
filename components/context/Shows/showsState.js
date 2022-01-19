@@ -5,11 +5,11 @@ import {
   CLEAR_SINGLE_SHOW,
 } from "../types";
 import axios from "axios";
-import ShowsReducer from "./showsReducer"
-import AppContext from "../Shows/showsContext"
+import ShowsReducer from "./showsReducer";
+import AppContext from "../Shows/showsContext";
 import { useReducer } from "react";
 
-const ShowsState = ({children}) => {
+const ShowsState = ({ children }) => {
   const initialState = {
     shows: [],
     singleShow: [],
@@ -36,17 +36,19 @@ const ShowsState = ({children}) => {
     });
     const { data } = await axios.get(`https://api.tvmaze.com/shows/${id}`);
 
+
     dispatch({
       type: SET_SINGLE_SHOW,
-      payload: data
-    })
-  }
+      payload: data,
+    });
+  };
+
 
   const clearShowPage = () => {
     dispatch({
-      type: CLEAR_SINGLE_SHOW
-    })
-  }
+      type: CLEAR_SINGLE_SHOW,
+    });
+  };
 
   return (
     <AppContext.Provider
@@ -57,7 +59,6 @@ const ShowsState = ({children}) => {
         searchShows,
         getShowPage,
         clearShowPage,
-      
       }}
     >
       {children}

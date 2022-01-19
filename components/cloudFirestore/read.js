@@ -7,8 +7,42 @@ import styles from "../../styles/SeriesDash.module.scss";
 
 const ReadDataFromCloudFirestore = () => {
   const { user } = useUser();
-  const [database, setDatabase] = useState("");
+  const [database, setDatabase] = useState([]);
   const [arrLength, setArrLength] = useState("");
+  const [refreshState, setRefreshState] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      firebase
+        .firestore()
+        .collection("Ratings")
+        .doc(user.id)
+        .get()
+        .then((snapshot2) => {
+          let rate = snapshot2.data();
+          if (rate === undefined) {
+            localStorage.setItem("stars", "[]");
+          } else {
+            localStorage.setItem("stars", JSON.stringify(rate.starsRatings));
+          }
+        });
+    }
+  }, [refreshState]);
+
+  const deleteWatched = (ID) => {
+    const newData = database.filter((el) => {
+      return el.id !== ID;
+    });
+    setDatabase(newData);
+
+    firebase
+      .firestore()
+      .collection("Users")
+      .doc(user.id)
+      .set({ data2: newData });
+
+    setArrLength(newData.length);
+  };
 
   useEffect(() => {
     let isCancelled = false;
@@ -21,13 +55,12 @@ const ReadDataFromCloudFirestore = () => {
           .get()
           .then((snapshot) => {
             let data = snapshot.data();
-            setDatabase(data);
-            let dataLength = JSON.parse(localStorage.getItem("series"));
-            setArrLength(dataLength.length);
+            setDatabase(data?.data2);
+            setArrLength(data?.data2.length);
             if (data === undefined) {
               localStorage.setItem("series", "[]");
             } else {
-              localStorage.setItem("series", JSON.stringify(data.data2));
+              localStorage.setItem("series", JSON.stringify(data?.data2));
             }
           });
       }
@@ -36,22 +69,14 @@ const ReadDataFromCloudFirestore = () => {
     return () => {
       isCancelled = true;
     };
-  }, [[]]);
+  }, [refreshState]);
 
-  const deleteWatched = (ID) => {
-    let toDelete = JSON.parse(localStorage.getItem("series"));
-    const filtered = toDelete.filter((item) => item.id !== ID);
-    localStorage.setItem("series", JSON.stringify(filtered));
-
-    firebase
-      .firestore()
-      .collection("Users")
-      .doc(user.id)
-      .set({ data2: filtered });
-  };
+  useEffect(() => {
+    setRefreshState(!refreshState);
+  }, []);
 
   let time = database
-    ? database.data2
+    ? database
         .map((mn) => mn.minutes)
         .reduce((sum, current) => sum + current, 0)
     : "";
@@ -75,24 +100,24 @@ const ReadDataFromCloudFirestore = () => {
       <p></p>
       <div className={styles.series}>
         {database
-          ? database.data2.map((el) => (
+          ? database.map((el) => (
               <div className={styles.series__content} key={el.id}>
                 <div className={styles.series__info}>
                   <p>{el.name}</p>
                   <Link href={`/show/${el.id}`}>
                     <img src={el.image ? el.image : "/img/poster.jpg"} />
                   </Link>
-                  <span
+                  <button
                     className={styles.series__delete__btn}
                     onClick={() => deleteWatched(el.id)}
                   >
                     &times;
-                  </span>
+                  </button>
                 </div>
               </div>
             ))
           : ""}
-        {arrLength === 0 ? (
+        {arrLength === 0 || arrLength === undefined ? (
           <h1 className={styles.series__h1}>
             You don't have any series added yet, go to <a href="/">Homepage</a>{" "}
             to add your first series

@@ -11,14 +11,17 @@ import Scroll from "../../components/scroll";
 import Stars from "../../components/stars";
 
 const ShowDetails = () => {
-  const { getShowPage, singleShow } = useContext(AppContext);
+  const {
+    getShowPage,
+    singleShow,
+  } = useContext(AppContext);
   const router = useRouter();
   const { user } = useUser();
   const stars = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(undefined);
   const [id, setID] = useState(null);
-  const [ratings, setRatings] = useState("");
+  const [episodes, setEpisodes] = useState("");
 
   const color = {
     gray: "#d8d8d8",
@@ -45,7 +48,7 @@ const ShowDetails = () => {
       if (id === null && rating === 0) return;
 
       if (starsSr.find((el) => el.id === id)) {
-        starsSr.push({ id: id, rating: rating });
+        starsSr.push({ id, rating });
         let element = starsSr.find((el) => el.id === id);
         let elToDelete = starsSr.indexOf(element);
         starsSr.splice(elToDelete, 1);
@@ -57,8 +60,9 @@ const ShowDetails = () => {
           .doc(user.id)
           .set({ starsRatings: starsSr });
       } else {
-        starsSr.push({ id: id, rating: rating });
+        starsSr.push({ id, rating });
         localStorage.setItem("stars", JSON.stringify(starsSr));
+
         sendRating();
       }
     }
@@ -67,8 +71,6 @@ const ShowDetails = () => {
       isCancelled = true;
     };
   }, [rating]);
-
-  const [episodes, setEpisodes] = useState("");
 
   useEffect(() => {
     let isCancelled = false;
@@ -86,28 +88,12 @@ const ShowDetails = () => {
     };
   }, []);
 
-  if (user) {
-    firebase
-      .firestore()
-      .collection("Ratings")
-      .doc(user.id)
-      .get()
-      .then((snapshot2) => {
-        let rate = snapshot2.data();
-        setRatings(rate);
-        if (rate === undefined) {
-          localStorage.setItem("stars", "[]");
-        } else {
-          localStorage.setItem("stars", JSON.stringify(rate.starsRatings));
-        }
-      });
-  }
   useEffect(() => {
     let isCancelled = false;
     if (!isCancelled) {
       let starsSr = JSON.parse(localStorage.getItem("stars") || "[]");
-      let lol = starsSr.find((el) => el.id === id);
-      lol ? setRating(lol.rating) : "";
+      let isMatched = starsSr.find((el) => el.id === id);
+      isMatched ? setRating(isMatched.rating) : "";
     }
 
     return () => {
@@ -115,12 +101,12 @@ const ShowDetails = () => {
     };
   }, [episodes]);
 
-  const sendData = () => {
+  const sendRating = () => {
     if (user) {
-      let data2 = JSON.parse(localStorage.getItem("series") || "[]");
+      let starsRatings = JSON.parse(localStorage.getItem("stars") || "[]");
       try {
-        firebase.firestore().collection("Users").doc(user.id).set({
-          data2,
+        firebase.firestore().collection("Ratings").doc(user.id).set({
+          starsRatings,
         });
       } catch (error) {
         console.log(error);
@@ -128,12 +114,12 @@ const ShowDetails = () => {
     }
   };
 
-  const sendRating = () => {
+  const sendData = () => {
     if (user) {
-      let starsRatings = JSON.parse(localStorage.getItem("stars") || "[]");
+      let data2 = JSON.parse(localStorage.getItem("series") || "[]");
       try {
-        firebase.firestore().collection("Ratings").doc(user.id).set({
-          starsRatings,
+        firebase.firestore().collection("Users").doc(user.id).set({
+          data2,
         });
       } catch (error) {
         console.log(error);
@@ -157,9 +143,12 @@ const ShowDetails = () => {
             ? 0
             : episodes * singleShow.averageRuntime,
         rating: singleShow.rating ? singleShow.rating : "Brak danych",
+        genres: singleShow.genres ? singleShow.genres : "",
       });
     }
+
     localStorage.setItem("series", JSON.stringify(series));
+    // sendData2(series);
     sendData();
   };
 

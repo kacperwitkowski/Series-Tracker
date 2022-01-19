@@ -24,13 +24,17 @@
     }
 
     &__delete__btn {
-        position: absolute;
-        top: 25px;
-        right: 30px;
-        color: white;
-        cursor: pointer;
-        font-size: 28px;
-        background-color: red;
+    position: absolute;
+    top: 25px;
+    right: 30px;
+    color: white;
+    cursor: pointer;
+    font-size: 28px;
+    background-color: red;
+    border: none;
+    width: 20px;
+    text-align: center;
+    padding: 0px;
     }
 
 
