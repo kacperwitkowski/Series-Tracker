@@ -97,6 +97,7 @@ const ShowDetails = (props) => {
     const newStarsArray = starsArray.filter((el) => el.id !== props.data.id);
     setRating(0);
     localStorage.setItem("stars", JSON.stringify(newStarsArray));
+    saveToFirebase("stars", "Ratings");
   };
 
   const saveToFirebase = (type, collection) => {
