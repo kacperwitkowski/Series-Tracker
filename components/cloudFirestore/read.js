@@ -23,7 +23,7 @@ const ReadDataFromCloudFirestore = () => {
           if (rate === undefined) {
             localStorage.setItem("stars", "[]");
           } else {
-            localStorage.setItem("stars", JSON.stringify(rate.starsRatings));
+            localStorage.setItem("stars", JSON.stringify(rate.data));
           }
         });
     }
@@ -35,11 +35,13 @@ const ReadDataFromCloudFirestore = () => {
     });
     setDatabase(newData);
 
+    localStorage.setItem("series", JSON.stringify(newData));
+
     firebase
       .firestore()
       .collection("Users")
       .doc(user.id)
-      .set({ data2: newData });
+      .set({ data: newData });
 
     setArrLength(newData.length);
   };
@@ -54,13 +56,16 @@ const ReadDataFromCloudFirestore = () => {
           .doc(user.id)
           .get()
           .then((snapshot) => {
-            let data = snapshot.data();
-            setDatabase(data?.data2);
-            setArrLength(data?.data2.length);
-            if (data === undefined) {
+            let firebaseData = snapshot.data();
+            setDatabase(firebaseData?.data);
+            setArrLength(firebaseData?.data?.length);
+            if (firebaseData === undefined) {
               localStorage.setItem("series", "[]");
             } else {
-              localStorage.setItem("series", JSON.stringify(data?.data2));
+              localStorage.setItem(
+                "series",
+                JSON.stringify(firebaseData?.data)
+              );
             }
           });
       }

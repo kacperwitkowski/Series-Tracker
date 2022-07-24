@@ -9,7 +9,7 @@ import styles from "../styles/Home.module.scss";
 import { useUser } from "../firebase/useUser";
 import Scroll from "../components/scroll";
 
-export default function Home() {
+const Home = () => {
   const [searched, setSearched] = useState("");
   const { shows, searchShows, loading } = useContext(AppContext);
   const { user } = useUser();
@@ -62,7 +62,6 @@ export default function Home() {
             {shows.length !== 0 ? (
               shows.map((el) => (
                 <ListShowsView
-                  whole={el}
                   key={el.show.id}
                   id={el.show.id}
                   image={
@@ -120,4 +119,6 @@ export default function Home() {
       </div>
     </>
   );
-}
+};
+
+export default Home;

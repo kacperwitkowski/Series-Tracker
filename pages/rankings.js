@@ -10,26 +10,28 @@ const Rankings = () => {
   const [watchTime, setWatchTime] = useState("");
   const [watchedCategory, setWatchedCategory] = useState("");
   const [starsRatings, setStarsRatings] = useState("");
-  const counts = {};
   const [ranking, setRanking] = useState([]);
   const [avatar, setAvatar] = useState("");
+  const counts = {};
 
-  useEffect(async () => {
-    const testy = await axios.get(
-      "https://api.themoviedb.org/3/trending/tv/week?api_key=a5257983ea0a933c036819e2e66c14e7"
-    );
+  useEffect(() => {
+    const fetchData = async () => {
+      const getData = await axios.get(
+        "https://api.themoviedb.org/3/trending/tv/week?api_key=a5257983ea0a933c036819e2e66c14e7"
+      );
 
-    setRanking(testy.data.results);
+      setRanking(getData.data.results);
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
     //type fav genre
 
-    const seriesFromLC = JSON.parse(localStorage.getItem("series") || "[]");
+    const seriesFromLS = JSON.parse(localStorage.getItem("series") || "[]");
 
-    const userGenres = seriesFromLC.map((el) => el.genres);
+    const userGenres = seriesFromLS.map((el) => el.genres);
     const listOfGenres = [].concat.apply([], userGenres);
-
     const mostWatchedCategory = listOfGenres.reduce(
       (a, b, _, arr) =>
         arr.filter((v) => v === a).length >= arr.filter((v) => v === b).length
@@ -48,65 +50,75 @@ const Rankings = () => {
 
     let starsValue = starsRatings
       .map((el) => el.rating)
-      .reduce((a, sum) => a + sum, 0);
+      .reduce((a, b) => a + b, 0);
 
-    const listOfRatings = (starsValue / starsRatings.length).toFixed(1);
+    const sumOfRatings = (starsValue / starsRatings.length).toFixed(1);
 
-    setStarsRatings(listOfRatings);
+    setStarsRatings(sumOfRatings);
   }, []);
 
-  useEffect(async () => {
-    //calc my minutes
-    const snapshotUsers = await firebase.firestore().collection("Users").get();
+  useEffect(() => {
+    const calcUserMinutes = async () => {
+      //calc my minutes
+      const snapshotUsers = await firebase
+        .firestore()
+        .collection("Users")
+        .get();
 
-    let listOfArrays = snapshotUsers.docs.map(
-      (element) => element.data().data2
-    );
+      let listOfArrays = snapshotUsers.docs.map(
+        (element) => element.data().data
+      );
 
-    let sumOfWatchTime = listOfArrays.map((item) =>
-      item?.map((ech) => ech.minutes).reduce((a, b) => a + b, 0)
-    );
+      let sumOfWatchTime = listOfArrays.map((item) =>
+        item?.map((el) => el.minutes).reduce((a, b) => a + b, 0)
+      );
 
-    let seriesFromLC = JSON.parse(localStorage.getItem("series") || "[]");
+      let seriesFromLS = JSON.parse(localStorage.getItem("series") || "[]");
 
-    let myMinutes = seriesFromLC
-      ?.map((el) => el.minutes)
-      .reduce((sum, current) => sum + current, 0);
+      let myMinutes = seriesFromLS
+        ?.map((el) => el.minutes)
+        .reduce((a, b) => a + b, 0);
 
-    let betterThanMe = sumOfWatchTime?.filter((el) => el > myMinutes);
-    let calcedPercentage = (
-      (betterThanMe?.length / sumOfWatchTime?.length) *
-      100
-    ).toFixed(1);
-
-    setWatchTime(calcedPercentage);
-  }, []);
-
-  useEffect(async () => {
-    //percentage of avatar
-    const snapshotAvatar = await firebase
-      .firestore()
-      .collection("Avatars")
-      .get();
-
-    const sortedData = snapshotAvatar.docs.map((el) => el.data().data);
-    const avatar = localStorage.getItem("avatar");
-    setAvatar(avatar);
-
-    const calcPercentage = (name) => {
-      sortedData.forEach((x) => {
-        counts[x] = (counts[x] || 0) + 1;
-      });
-      const valueOfObj = counts[name];
-
-      const percentageOfAvatars = (
-        (valueOfObj / sortedData?.length) *
+      let betterThanMe = sumOfWatchTime?.filter((el) => el > myMinutes);
+      let calcedPercentage = (
+        (betterThanMe?.length / sumOfWatchTime?.length) *
         100
       ).toFixed(1);
 
-      setPercentage(percentageOfAvatars ? percentageOfAvatars : 0);
+      setWatchTime(calcedPercentage);
     };
-    calcPercentage(avatar);
+    calcUserMinutes();
+  }, []);
+
+  useEffect(() => {
+    const calcAvatarPerc = async () => {
+      //percentage of avatar
+      const snapshotAvatar = await firebase
+        .firestore()
+        .collection("Avatars")
+        .get();
+
+      const sortedData = snapshotAvatar.docs.map((el) => el.data().data);
+
+      const avatar = localStorage.getItem("avatar");
+      setAvatar(avatar);
+
+      const calcPercentage = (name) => {
+        sortedData.forEach((x) => {
+          counts[x] = (counts[x] || 0) + 1;
+        });
+        const valueOfObj = counts[name];
+
+        const percentageOfAvatars = (
+          (valueOfObj / sortedData?.length) *
+          100
+        ).toFixed(1);
+
+        setPercentage(percentageOfAvatars ? percentageOfAvatars : 0);
+      };
+      calcPercentage(avatar);
+    };
+    calcAvatarPerc();
   }, []);
 
   return (
@@ -135,7 +147,7 @@ const Rankings = () => {
             <div className={styles.stats__container__div}>
               <p>
                 The most watched category by you were{" "}
-                {watchedCategory ? watchedCategory : "None"}
+                "{watchedCategory ? watchedCategory : "None"}"
               </p>
               <img src="/svg/eyes.svg" />
             </div>
@@ -155,7 +167,7 @@ const Rankings = () => {
               xmlnsXlink="http://www.w3.org/1999/xlink"
               viewBox="0 24 150 28"
               preserveAspectRatio="none"
-              shape-rendering="auto"
+              shapeRendering="auto"
             >
               <defs>
                 <path
@@ -193,7 +205,7 @@ const Rankings = () => {
         <div className={styles.stats__trending}>
           {ranking
             ? ranking.map((el, i) => (
-                <div style={{ position: "relative" }}>
+                <div key={i} style={{ position: "relative" }}>
                   <p style={{ textAlign: "center" }}>{el.original_name}</p>
                   {i === 0 && (
                     <img
@@ -214,7 +226,9 @@ const Rankings = () => {
                     />
                   )}
                   {i !== 0 && i !== 1 && i !== 2 && (
-                    <div className={styles.stats__trending__others}>{i + 1}</div>
+                    <div className={styles.stats__trending__others}>
+                      {i + 1}
+                    </div>
                   )}
                   <img
                     style={{ position: "relative" }}
