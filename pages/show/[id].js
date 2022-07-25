@@ -52,7 +52,7 @@ const ShowDetails = (props) => {
     return () => {
       isCancelled = true;
     };
-  }, [singleShow]);
+  }, [singleShow.id]);
 
   useEffect(() => {
     const starsArray = JSON.parse(localStorage.getItem("stars") || "[]");
