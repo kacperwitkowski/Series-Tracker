@@ -18,6 +18,7 @@ const ShowDetails = (props) => {
   const [episodes, setEpisodes] = useState("");
   const [duplicate, setDuplicate] = useState(false);
   const [error, setError] = useState("");
+  const [changeBtn, setChangeBtn] = useState(false);
 
   const color = {
     gray: "#d8d8d8",
@@ -52,7 +53,7 @@ const ShowDetails = (props) => {
     return () => {
       isCancelled = true;
     };
-  }, [singleShow.id]);
+  }, [singleShow?.id, changeBtn]);
 
   useEffect(() => {
     const starsArray = JSON.parse(localStorage.getItem("stars") || "[]");
@@ -114,6 +115,7 @@ const ShowDetails = (props) => {
   };
 
   const handleSaveData = () => {
+    setChangeBtn(true);
     let series = JSON.parse(localStorage.getItem("series") || "[]");
     let duplicate = series.find((el) => el.id === singleShow.id);
 
