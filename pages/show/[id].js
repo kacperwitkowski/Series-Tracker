@@ -18,8 +18,7 @@ const ShowDetails = (props) => {
   const [episodes, setEpisodes] = useState("");
   const [duplicate, setDuplicate] = useState(false);
   const [error, setError] = useState("");
-  const [changeBtn, setChangeBtn] = useState(false);
-
+ 
   const color = {
     gray: "#d8d8d8",
     gold: "gold",
@@ -48,12 +47,14 @@ const ShowDetails = (props) => {
       if (duplicate) {
         setError("Can't add this series to your watched list");
         setDuplicate(true);
+      } else {
+        setDuplicate(false);
       }
     }
     return () => {
       isCancelled = true;
     };
-  }, [singleShow?.id, changeBtn]);
+  }, [singleShow?.id]);
 
   useEffect(() => {
     const starsArray = JSON.parse(localStorage.getItem("stars") || "[]");
@@ -115,7 +116,7 @@ const ShowDetails = (props) => {
   };
 
   const handleSaveData = () => {
-    setChangeBtn(true);
+    setDuplicate(true);
     let series = JSON.parse(localStorage.getItem("series") || "[]");
     let duplicate = series.find((el) => el.id === singleShow.id);
 
