@@ -4,7 +4,7 @@ import styles from "../styles/ListShowsView.module.scss";
 const ListShowsView = ({ image, name, rating, id }) => {
   return (
     <div>
-      <Link href="/show/[id]" as={`/show/${id}`}>
+      <Link href={`/show/${id}`}>
         <a className={styles.card}>
           <div className={styles.card__list}>
             <div>

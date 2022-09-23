@@ -46,7 +46,9 @@ const Rankings = () => {
   useEffect(() => {
     //calc ratings
 
-    let starsRatings = JSON.parse(localStorage.getItem("stars") || "[]");
+    let starsRatings = JSON.parse(localStorage.getItem("stars") || "[]").filter(
+      (el) => el.rating !== null
+    );
 
     let starsValue = starsRatings
       .map((el) => el.rating)
@@ -146,8 +148,8 @@ const Rankings = () => {
             </div>
             <div className={styles.stats__container__div}>
               <p>
-                The most watched category by you were{" "}
-                "{watchedCategory ? watchedCategory : "None"}"
+                The most watched category by you were "
+                {watchedCategory ? watchedCategory : "None"}"
               </p>
               <img src="/svg/eyes.svg" />
             </div>

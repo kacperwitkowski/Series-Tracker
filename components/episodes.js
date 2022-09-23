@@ -1,27 +1,13 @@
 import styles from "../styles/Episodes.module.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-const Episodes = ({ id }) => {
-  const [episodeData, setEpisodeData] = useState([]);
-  const [seasonNumber, setSeasonNumber] = useState([]);
+const Episodes = ({ seasons, episodes }) => {
   const [selected, setSelected] = useState(null);
   const [summary, setSummary] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  useEffect(() => {
-    fetch(`https://api.tvmaze.com/shows/${id}/seasons`)
-      .then((response) => response.json())
-      .then((data) => {
-        setSeasonNumber(data);
-      });
-
-    fetch(`https://api.tvmaze.com/shows/${id}/episodes`)
-      .then((response) => response.json())
-      .then((data) => {
-        setEpisodeData(data);
-      });
-  }, []);
-
+  console.log(seasons);
+  console.log(episodes);
   const toggle = (i) => {
     if (selected === i) {
       return setSelected(null);
@@ -41,17 +27,20 @@ const Episodes = ({ id }) => {
   return (
     <div className={styles.episodes}>
       <div className={styles.episodes__seasons__container}>
-        {seasonNumber.map((el, i) => (
-          <div data-set={[i + 1]} key={[i + 1]}>
-            <div className={styles.singleSeason} onClick={() => toggle(i)}>
-              Season {el.number}
-              <button>{selected === i ? "-" : "+"}</button>
-            </div>
-          </div>
-        ))}
+        {seasons.map(
+          (el, i) =>
+            el.premiereDate !== null && (
+              <div data-set={[i + 1]} key={[i + 1]}>
+                <div className={styles.singleSeason} onClick={() => toggle(i)}>
+                  Season {el.number}
+                  <button>{selected === i ? "-" : "+"}</button>
+                </div>
+              </div>
+            )
+        )}
       </div>
       <div className={styles.episodes__container}>
-        {episodeData.map((ep, i) =>
+        {episodes.map((ep, i) =>
           selected === ep.season - 1 ? (
             <div className={styles.episodes__singleEpisode} key={ep.id}>
               <div className={styles.episodes__singleEpisode__title}>

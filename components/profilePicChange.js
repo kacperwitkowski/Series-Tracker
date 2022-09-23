@@ -25,7 +25,7 @@ const ProfilePicChange = () => {
           }
         });
     }
-  }, [[]]);
+  }, []);
 
   const avatars = [
     "Lucifer.jpg",
@@ -55,7 +55,7 @@ const ProfilePicChange = () => {
       (el) => (el.style.border = "none")
     );
 
-    localStorage.setItem("avatar", img);
+    setPicture(img);
     e.target.style.border = "2px solid green";
   };
 
@@ -66,6 +66,7 @@ const ProfilePicChange = () => {
 
   const handleOk = () => {
     setIsModalVisible(false);
+    localStorage.setItem("avatar", picture);
     sendData();
     document.body.style.overflowY = "scroll";
   };
@@ -82,7 +83,7 @@ const ProfilePicChange = () => {
         data,
       });
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
@@ -100,7 +101,13 @@ const ProfilePicChange = () => {
   return (
     <>
       <div className={styles.dashboard__image__container}>
-        <img src={picture ? `/img/${picture}` : "/img/av3.png"} />
+        <img
+          src={
+            localStorage.getItem("avatar")
+              ? `/img/${localStorage.getItem("avatar")}`
+              : "/img/av3.png"
+          }
+        />
         <button
           type="primary"
           onClick={showModal}

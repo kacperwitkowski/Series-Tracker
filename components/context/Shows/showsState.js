@@ -30,35 +30,12 @@ const ShowsState = ({ children }) => {
     });
   };
 
-  const getShowPage = async (id) => {
-    dispatch({
-      type: SET_LOADING,
-    });
-    const { data } = await axios.get(`https://api.tvmaze.com/shows/${id}`);
-
-
-    dispatch({
-      type: SET_SINGLE_SHOW,
-      payload: data,
-    });
-  };
-
-
-  const clearShowPage = () => {
-    dispatch({
-      type: CLEAR_SINGLE_SHOW,
-    });
-  };
-
   return (
     <AppContext.Provider
       value={{
         shows: state.shows,
-        singleShow: state.singleShow,
         loading: state.loading,
         searchShows,
-        getShowPage,
-        clearShowPage,
       }}
     >
       {children}
