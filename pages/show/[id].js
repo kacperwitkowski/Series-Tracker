@@ -218,13 +218,13 @@ const ShowDetails = ({ show, seasons, episodes }) => {
   );
 };
 
-export const getServerSideProps = ({ params }) => {
-  const [showRes, seasonsRes, episodesRes] = Promise.all([
+export const getServerSideProps = async ({ params }) => {
+  const [showRes, seasonsRes, episodesRes] = await Promise.all([
     fetch(`https://api.tvmaze.com/shows/${params.id}`),
     fetch(`https://api.tvmaze.com/shows/${params.id}/seasons`),
     fetch(`https://api.tvmaze.com/shows/${params.id}/episodes`),
   ]);
-  const [show, seasons, episodes] = Promise.all([
+  const [show, seasons, episodes] = await Promise.all([
     showRes.json(),
     seasonsRes.json(),
     episodesRes.json(),

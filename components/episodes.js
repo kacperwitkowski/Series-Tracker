@@ -6,8 +6,6 @@ const Episodes = ({ seasons, episodes }) => {
   const [summary, setSummary] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  console.log(seasons);
-  console.log(episodes);
   const toggle = (i) => {
     if (selected === i) {
       return setSelected(null);
