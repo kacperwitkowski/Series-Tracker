@@ -8,18 +8,37 @@ import { useUser } from "../../firebase/useUser";
 import Scroll from "../../components/scroll";
 import Stars from "../../components/stars";
 
-const ShowDetails = ({ show, seasons, episodes }) => {
+const ShowDetails = ({ show }) => {
   const { user } = useUser();
   const stars = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const [rating, setRating] = useState(null);
   const [hoverRating, setHoverRating] = useState(undefined);
   const [duplicate, setDuplicate] = useState(false);
+  const [seasons, setSeasons] = useState([]);
+  const [episodes, setEpisodes] = useState([]);
   const [error, setError] = useState("");
 
   const color = {
     gray: "#d8d8d8",
     gold: "gold",
   };
+
+  useEffect(() => {
+    const gowno = async () => {
+      const [seasonsRes, episodesRes] = await Promise.all([
+        fetch(`https://api.tvmaze.com/shows/${show.id}/seasons`),
+        fetch(`https://api.tvmaze.com/shows/${show.id}/episodes`),
+      ]);
+      const [seasons, episodes] = await Promise.all([
+        seasonsRes.json(),
+        episodesRes.json(),
+      ]);
+
+      setSeasons(seasons);
+      setEpisodes(episodes);
+    };
+    gowno();
+  }, [show]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -218,18 +237,24 @@ const ShowDetails = ({ show, seasons, episodes }) => {
   );
 };
 
-export const getServerSideProps = async ({ params }) => {
-  const [showRes, seasonsRes, episodesRes] = await Promise.all([
-    fetch(`https://api.tvmaze.com/shows/${params.id}`),
-    fetch(`https://api.tvmaze.com/shows/${params.id}/seasons`),
-    fetch(`https://api.tvmaze.com/shows/${params.id}/episodes`),
-  ]);
-  const [show, seasons, episodes] = await Promise.all([
-    showRes.json(),
-    seasonsRes.json(),
-    episodesRes.json(),
-  ]);
-  return { props: { show, seasons, episodes } };
-};
+export async function getServerSideProps(context) {
+  const id = (parseInt(context.query.id) || 1).toString();
+
+  const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
+  const show = await res.json();
+  return { props: { show } };
+}
+
+// export async function getServerSideProps(context) {
+//   const [seasonsRes, episodesRes] = await Promise.all([
+//     fetch(`https://api.tvmaze.com/shows/${context.query.id}/seasons`),
+//     fetch(`https://api.tvmaze.com/shows/${context.query.id}/episodes`),
+//   ]);
+//   const [seasons, episodes] = await Promise.all([
+//     seasonsRes.json(),
+//     episodesRes.json(),
+//   ]);
+//   return { props: { seasons, episodes } };
+// }
 
 export default ShowDetails;
