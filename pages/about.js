@@ -19,7 +19,7 @@ const About = () => {
           </div>
           <div className={styles.about__content__wrapper}>
             <div className={styles.about__content__info}>
-              <img src="/gif/patrick.gif" />
+              <img src="/gif/patrick.gif" alt="funny gif"/>
               <h2>General</h2>
               <p>
                 Series Tracker allows users to browse theirs favourite TV shows
@@ -35,7 +35,7 @@ const About = () => {
               </p>
             </div>
             <div className={styles.about__content__contact}>
-              <img src="/gif/money.gif" />
+              <img src="/gif/money.gif" alt="funny gif"/>
               <h2>Contact</h2>
               <p>
                 If you have any questions or you are interested in working
@@ -43,13 +43,13 @@ const About = () => {
               </p>
               <div className={styles.about__links}>
                 <a target="_blank" href="https://github.com/kacperwitkowski">
-                  <img src="/svg/github.svg" />
+                  <img src="/svg/github.svg" alt="github logo"/>
                 </a>
                 <a target="_blank" href="mailto:witkowskik46@gmail.com">
-                  <img src="/svg/gmail.svg" />
+                  <img src="/svg/gmail.svg" alt="gmail logo"/>
                 </a>
                 <a target="_blank" href="https://www.instagram.com/">
-                  <img src="/svg/instagram.svg" />
+                  <img src="/svg/instagram.svg" alt="instagram logo"/>
                 </a>
               </div>
             </div>

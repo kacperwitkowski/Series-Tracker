@@ -151,8 +151,9 @@ const ShowDetails = ({ show }) => {
             <div className={styles.showpage__container}>
               <div className={styles.showpage__image__name}>
                 <img
+                  alt="poster"
                   src={show.image ? show.image.original : "/img/poster.jpg"}
-                ></img>
+                />
               </div>
 
               <div className={styles.showpage__details}>

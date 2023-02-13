@@ -62,7 +62,7 @@ const Episodes = ({ seasons, episodes }) => {
               </div>
               <div className={styles.episodes__summary__container}>
                 {summary !== ep.id ? (
-                  <img src={ep.image ? ep.image.medium : "/img/poster.jpg"} />
+                  <img src={ep.image ? ep.image.medium : "/img/poster.jpg"} alt="poster"/>
                 ) : (
                   ""
                 )}

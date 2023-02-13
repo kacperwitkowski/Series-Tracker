@@ -12,7 +12,7 @@ const Navbar = () => {
           <div className={styles.navbar__brand}>
             <Link href="/">
               <a>
-                <img className={styles.navbar__logo} src="/img/logo.png"></img>
+                <img className={styles.navbar__logo} src="/img/logo.png" alt="logo"/>
                 <span>Series Tracker</span>
               </a>
             </Link>

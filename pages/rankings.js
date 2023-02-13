@@ -137,28 +137,31 @@ const Rankings = () => {
                 Same avatar was selected by{" "}
                 {isNaN(percentage) ? "0" : percentage}% users
               </p>
-              <img src={avatar ? `/img/${avatar}` : "/img/av3.png"} />
+              <img
+                src={avatar ? `/img/${avatar}` : "/img/av3.png"}
+                alt="avatar"
+              />
             </div>
             <div className={styles.stats__container__div}>
               <p>
                 More minutes then you were viewed by{" "}
                 {watchTime ? `${watchTime}` : "0"}% of users
               </p>
-              <img src="/svg/tv.svg" />
+              <img src="/svg/tv.svg" alt="tv" />
             </div>
             <div className={styles.stats__container__div}>
               <p>
                 The most watched category by you were "
                 {watchedCategory ? watchedCategory : "None"}"
               </p>
-              <img src="/svg/eyes.svg" />
+              <img src="/svg/eyes.svg" alt="eyes" />
             </div>
             <div className={styles.stats__container__div}>
               <p>
                 The average of your ratings is{" "}
                 {isNaN(starsRatings) ? "0" : starsRatings}
               </p>
-              <img src="/svg/goldenstar.svg" />
+              <img src="/svg/goldenstar.svg" alt="star" />
             </div>
           </div>
 
@@ -213,18 +216,21 @@ const Rankings = () => {
                     <img
                       className={styles.stats__trending__medal}
                       src="/svg/goldmedal.svg"
+                      alt="gold medal"
                     />
                   )}
                   {i === 1 && (
                     <img
                       className={styles.stats__trending__medal}
                       src="/svg/silvermedal.svg"
+                      alt="silver medal"
                     />
                   )}
                   {i === 2 && (
                     <img
                       className={styles.stats__trending__medal}
                       src="/svg/bronzemedal.svg"
+                      alt="bronze medal"
                     />
                   )}
                   {i !== 0 && i !== 1 && i !== 2 && (

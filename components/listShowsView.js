@@ -11,14 +11,17 @@ const ListShowsView = ({ image, name, rating, id }) => {
               <img
                 className={`${styles.card__img_1} ${styles.card__img}`}
                 src="/img/lc1.png"
+                alt="tape"
               />
               <img
                 className={`${styles.card__img_2} ${styles.card__img}`}
                 src="/img/lc2.png"
+                alt="tape"
               />
               <img
                 className={`${styles.card__img_3} ${styles.card__img}`}
                 src="/img/lc1.png"
+                alt="tape"
               />
               <div className={styles.card__imageContainer}>
                 <img src={image} alt={name} />

@@ -110,7 +110,7 @@ const ReadDataFromCloudFirestore = () => {
                 <div className={styles.series__info}>
                   <p>{el.name}</p>
                   <Link href={`/show/${el.id}`}>
-                    <img src={el.image ? el.image : "/img/poster.jpg"} />
+                    <img src={el.image ? el.image : "/img/poster.jpg"} alt="poster"/>
                   </Link>
                   <button
                     className={styles.series__delete__btn}

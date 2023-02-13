@@ -94,6 +94,7 @@ const ProfilePicChange = () => {
         className={styles.modal__img}
         src={`/img/${img}`}
         onClick={(e) => avatarChange(e, img)}
+        alt="avatar"
       />
     );
   });

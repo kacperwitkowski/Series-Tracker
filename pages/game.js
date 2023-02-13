@@ -150,7 +150,7 @@ const Game = () => {
             ? series.map((el) => (
                 <div key={el.id} onClick={(e) => chooseSeries(e, el)}>
                   <div className={styles.game__images}>
-                    <img src={el.image ? el.image : "/img/poster.jpg"} />
+                    <img alt="poster" src={el.image ? el.image : "/img/poster.jpg"} />
                   </div>
                 </div>
               ))
