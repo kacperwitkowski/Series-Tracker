@@ -44,6 +44,7 @@ const ShowDetails = ({ show }) => {
 
   useEffect(() => {
     const getData = async () => {
+      console.log(show)
       const getSeasons = await axios.get(
         `https://api.tvmaze.com/shows/${show.id}/seasons`
       );
@@ -55,7 +56,7 @@ const ShowDetails = ({ show }) => {
       setEpisodes(getEpisodes.data);
     };
     getData();
-  }, [show]);
+  }, [show.id]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -141,7 +142,7 @@ const ShowDetails = ({ show }) => {
     series.push({
       id: show.id,
       name: show.name,
-      image: show.image ? show.image.medium : "/img/poster.jpg",
+      image: show?.image ? show.image.original : "/img/poster.jpg",
       minutes:
         show.averageRuntime === "" ? 0 : episodes.length * show.averageRuntime,
       rating: show.rating ? show.rating : "No show",
@@ -169,7 +170,7 @@ const ShowDetails = ({ show }) => {
               <div className={styles.showpage__image__name}>
                 <img
                   alt="poster"
-                  src={show.image ? show.image.original : "/img/poster.jpg"}
+                  src={show?.image ? show.image.original : "/img/poster.jpg"}
                 />
               </div>
 
