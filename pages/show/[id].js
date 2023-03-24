@@ -1,5 +1,5 @@
 import Head from "next/dist/next-server/lib/head";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/ShowDetails.module.scss";
 import Spinner from "../../components/spinner";
 import Episodes from "../../components/episodes";
@@ -7,6 +7,7 @@ import firebase from "firebase";
 import { useUser } from "../../firebase/useUser";
 import Scroll from "../../components/scroll";
 import Stars from "../../components/stars";
+import axios from "axios";
 
 const ShowDetails = ({ show }) => {
   const { user } = useUser();
@@ -23,21 +24,37 @@ const ShowDetails = ({ show }) => {
     gold: "gold",
   };
 
-  useEffect(() => {
-    const gowno = async () => {
-      const [seasonsRes, episodesRes] = await Promise.all([
-        fetch(`https://api.tvmaze.com/shows/${show.id}/seasons`),
-        fetch(`https://api.tvmaze.com/shows/${show.id}/episodes`),
-      ]);
-      const [seasons, episodes] = await Promise.all([
-        seasonsRes.json(),
-        episodesRes.json(),
-      ]);
+  //slow version
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const [seasonsRes, episodesRes] = await Promise.all([
+  //       fetch(`https://api.tvmaze.com/shows/${show.id}/seasons`),
+  //       fetch(`https://api.tvmaze.com/shows/${show.id}/episodes`),
+  //     ]);
+  //     const [seasons, episodes] = await Promise.all([
+  //       seasonsRes.json(),
+  //       episodesRes.json(),
+  //     ]);
 
-      setSeasons(seasons);
-      setEpisodes(episodes);
+  //     setSeasons(seasons);
+  //     setEpisodes(episodes);
+  //   };
+  //   getData();
+  // }, [show]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const getSeasons = await axios.get(
+        `https://api.tvmaze.com/shows/${show.id}/seasons`
+      );
+      setSeasons(getSeasons.data);
+
+      const getEpisodes = await axios.get(
+        `https://api.tvmaze.com/shows/${show.id}/episodes`
+      );
+      setEpisodes(getEpisodes.data);
     };
-    gowno();
+    getData();
   }, [show]);
 
   useEffect(() => {
