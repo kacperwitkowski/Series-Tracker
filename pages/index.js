@@ -1,4 +1,4 @@
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
 import { useState, useContext, useEffect } from "react";
 import Alert from "../components/alert";
 import AlertsContext from "../components/context/Alerts/alertsContext";

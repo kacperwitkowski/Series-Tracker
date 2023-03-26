@@ -1,4 +1,4 @@
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
 import styles from "../styles/Dashboard.module.scss";
 import ReadDataFromCloudFirestore from "../components/cloudFirestore/read";
 import { useUser } from "../firebase/useUser";

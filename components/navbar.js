@@ -11,24 +11,22 @@ const Navbar = () => {
         <nav className={styles.navbar__nav}>
           <div className={styles.navbar__brand}>
             <Link href="/">
-              <a>
                 <img className={styles.navbar__logo} src="/img/logo.png" alt="logo"/>
                 <span>Series Tracker</span>
-              </a>
             </Link>
           </div>
           <div className={styles.navbar__linksContainer}>
             <Link href="/about">
-              <a>About</a>
+            About
             </Link>
             <Link href="/rankings">
-              <a>Rankings</a>
+              Rankings
             </Link>
             <Link href="/game">
-              <a>Game</a>
+              Game
             </Link>
             <Link href={user ? "/dashboard" : "/auth"}>
-              <a>{user ? "Dashboard" : "Login"}</a>
+              {user ? "Dashboard" : "Login"}
             </Link>
           </div>
         </nav>

@@ -1,4 +1,4 @@
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
 import FirebaseAuth from "../components/auth/FirebaseAuth";
 import styles from "../styles/Dashboard.module.scss";
 

@@ -1,4 +1,4 @@
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import styles from "../../styles/ShowDetails.module.scss";
 import Spinner from "../../components/spinner";
@@ -44,19 +44,21 @@ const ShowDetails = ({ show }) => {
 
   useEffect(() => {
     const getData = async () => {
-      console.log(show)
+      console.log(show);
       const getSeasons = await axios.get(
         `https://api.tvmaze.com/shows/${show.id}/seasons`
       );
-      setSeasons(getSeasons.data);
 
       const getEpisodes = await axios.get(
         `https://api.tvmaze.com/shows/${show.id}/episodes`
       );
+
+
+      setSeasons(getSeasons.data);
       setEpisodes(getEpisodes.data);
     };
     getData();
-  }, [show.id]);
+  }, []);
 
   useEffect(() => {
     let isCancelled = false;
@@ -87,7 +89,7 @@ const ShowDetails = ({ show }) => {
     return () => {
       isCancelled = true;
     };
-  }, [show.id]);
+  }, []);
 
   useEffect(() => {
     const starsArray = JSON.parse(localStorage.getItem("stars") || "[]");
@@ -258,6 +260,9 @@ const ShowDetails = ({ show }) => {
 
 export async function getServerSideProps(context) {
   const id = (parseInt(context.query.id) || 1).toString();
+
+  console.log(context.query.id)
+  console.log(id)
 
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   const show = await res.json();

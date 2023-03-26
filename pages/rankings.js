@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import firebase from "firebase/app";
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
 import styles from "../styles/Stats.module.scss";
 import Scroll from "../components/scroll";
 

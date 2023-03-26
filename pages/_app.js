@@ -2,7 +2,8 @@ import "../styles/globals.scss";
 import Layout from "../components/layout";
 import ShowsState from "../components/context/Shows/showsState";
 import AlertsState from "../components/context/Alerts/alertsState";
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
+
 
 function MyApp({ Component, pageProps }) {
   return (

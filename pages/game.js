@@ -1,4 +1,4 @@
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
 import styles from "../styles/Game.module.scss";
 import { useState, useEffect } from "react";
 import SingleCard from "../components/singleCard";

@@ -1,4 +1,4 @@
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
 import styles from "../styles/About.module.scss"
 import Scroll from "../components/scroll";
 
