@@ -169,19 +169,19 @@ const ShowDetails = ({ show }) => {
         {show ? (
           <div>
             <div className={styles.showpage__container}>
-              <div className={styles.showpage__image__name}>
+              <div className={styles.showpage__image__test}>
                 {console.log(show)}
-                <img
+                {/* <img
                   alt="poster"
                   src={show.image ? show.image.original : "/img/poster.jpg"}
-                />
-                {/* <Image
+                /> */}
+                <Image
                   src={show.image ? show.image.original : "/img/poster.jpg"}
-                  alt="gownosofar"
+                  alt="series poster"
                   priority={true}
                   layout="fill"
                   className={styles.showpage__imagee}
-                /> */}
+                />
               </div>
 
               <div className={styles.showpage__details}>
