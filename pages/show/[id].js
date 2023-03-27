@@ -169,19 +169,19 @@ const ShowDetails = ({ show }) => {
         {show ? (
           <div>
             <div className={styles.showpage__container}>
-              <div className={styles.showpage__image__test}>
+              <div className={styles.showpage__image__name}>
                 {console.log(show)}
-                {/* <img
+                <img
                   alt="poster"
                   src={show.image ? show.image.original : "/img/poster.jpg"}
-                /> */}
-                <Image
+                />
+                {/* <Image
                   src={show.image ? show.image.original : "/img/poster.jpg"}
                   alt="gownosofar"
                   priority={true}
                   layout="fill"
                   className={styles.showpage__imagee}
-                />
+                /> */}
               </div>
 
               <div className={styles.showpage__details}>
@@ -266,11 +266,15 @@ const ShowDetails = ({ show }) => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const id = (parseInt(context.query.id) || 1).toString();
+export async function getStaticPaths() {
+  return {
+    paths: [], //indicates that no page needs be created at build time
+    fallback: "blocking", //indicates the type of fallback
+  };
+}
 
-  console.log(context.query.id);
-  console.log(id);
+export async function getStaticProps({ params }) {
+  const id = (parseInt(params.id) || 1).toString();
 
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   const show = await res.json();
