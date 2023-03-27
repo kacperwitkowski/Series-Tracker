@@ -8,6 +8,7 @@ import { useUser } from "../../firebase/useUser";
 import Scroll from "../../components/scroll";
 import Stars from "../../components/stars";
 import axios from "axios";
+import Image from "next/image";
 
 const ShowDetails = ({ show }) => {
   const { user } = useUser();
@@ -52,7 +53,6 @@ const ShowDetails = ({ show }) => {
       const getEpisodes = await axios.get(
         `https://api.tvmaze.com/shows/${show.id}/episodes`
       );
-
 
       setSeasons(getSeasons.data);
       setEpisodes(getEpisodes.data);
@@ -169,10 +169,18 @@ const ShowDetails = ({ show }) => {
         {show ? (
           <div>
             <div className={styles.showpage__container}>
-              <div className={styles.showpage__image__name}>
-                <img
+              <div className={styles.showpage__image__test}>
+                {console.log(show)}
+                {/* <img
                   alt="poster"
-                  src={show?.image ? show.image.original : "/img/poster.jpg"}
+                  src={show.image ? show.image.original : "/img/poster.jpg"}
+                /> */}
+                <Image
+                  src={show.image ? show.image.original : "/img/poster.jpg"}
+                  alt="gownosofar"
+                  priority={true}
+                  layout="fill"
+                  className={styles.showpage__imagee}
                 />
               </div>
 
@@ -261,8 +269,8 @@ const ShowDetails = ({ show }) => {
 export async function getServerSideProps(context) {
   const id = (parseInt(context.query.id) || 1).toString();
 
-  console.log(context.query.id)
-  console.log(id)
+  console.log(context.query.id);
+  console.log(id);
 
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   const show = await res.json();
