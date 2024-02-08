@@ -1,7 +1,7 @@
 .homepage {
   background-image: url("/img/bg.jpg");
   background-position: center;
-
+  flex: 1;
 
   &__list {
     min-height: 78vh;
@@ -51,14 +51,14 @@
     border-bottom: 3px groove black;
   }
 
-  @media (max-width:1024px) {
+  @media (max-width: 1024px) {
     & {
       background-size: auto;
       background-position: center;
     }
   }
 
-  @media (max-width:680px) {
+  @media (max-width: 680px) {
     &__paint {
       flex-direction: column;
       align-items: center;
@@ -78,7 +78,6 @@
     }
   }
 
-
   @media (max-width: 420px) {
     &__paint p {
       font-size: 23px;
@@ -90,7 +89,6 @@
   }
 }
 
-
 .searchbar {
   width: 100%;
   height: 105px;
@@ -101,9 +99,8 @@
   box-sizing: border-box;
   color: #fff;
 
-
   &__input {
-    font-family: 'Abel', sans-serif;
+    font-family: "Abel", sans-serif;
     font-size: 28px;
     border: 0;
     border-radius: 40px;
@@ -126,7 +123,7 @@
     position: relative;
     width: 60%;
 
-    @media (max-width:600px) {
+    @media (max-width: 600px) {
       width: 90%;
     }
   }
@@ -159,7 +156,7 @@
   margin: 0 auto;
   color: white;
 
-  @media (max-width:600px) {
+  @media (max-width: 600px) {
     width: 100%;
   }
 }

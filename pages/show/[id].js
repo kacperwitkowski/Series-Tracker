@@ -25,40 +25,27 @@ const ShowDetails = ({ show }) => {
     gold: "gold",
   };
 
-  //slow version
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const [seasonsRes, episodesRes] = await Promise.all([
-  //       fetch(`https://api.tvmaze.com/shows/${show.id}/seasons`),
-  //       fetch(`https://api.tvmaze.com/shows/${show.id}/episodes`),
-  //     ]);
-  //     const [seasons, episodes] = await Promise.all([
-  //       seasonsRes.json(),
-  //       episodesRes.json(),
-  //     ]);
-
-  //     setSeasons(seasons);
-  //     setEpisodes(episodes);
-  //   };
-  //   getData();
-  // }, [show]);
-
   useEffect(() => {
-    const getData = async () => {
-      console.log(show);
-      const getSeasons = await axios.get(
-        `https://api.tvmaze.com/shows/${show.id}/seasons`
-      );
-
-      const getEpisodes = await axios.get(
-        `https://api.tvmaze.com/shows/${show.id}/episodes`
-      );
-
-      setSeasons(getSeasons.data);
-      setEpisodes(getEpisodes.data);
+    const fetchData = async () => {
+      try {
+        const [seasonsRes, episodesRes] = await Promise.all([
+          axios.get(`https://api.tvmaze.com/shows/${show.id}/seasons`),
+          axios.get(`https://api.tvmaze.com/shows/${show.id}/episodes`),
+        ]);
+        setSeasons(seasonsRes.data);
+        setEpisodes(episodesRes.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError("Failed to fetch data");
+      }
     };
-    getData();
-  }, []);
+
+    fetchData();
+
+    return () => {
+      // Cleanup logic
+    };
+  }, [show.id]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -179,7 +166,7 @@ const ShowDetails = ({ show }) => {
                   src={show.image ? show.image.original : "/img/poster.jpg"}
                   alt="series poster"
                   priority={true}
-                  layout="fill"
+                  fill
                   className={styles.showpage__imagee}
                 />
               </div>
@@ -267,17 +254,28 @@ const ShowDetails = ({ show }) => {
 };
 
 export async function getStaticPaths() {
+  // Fetching the list of all shows here to determine paths
+  const res = await fetch("https://api.tvmaze.com/shows");
+  const shows = await res.json();
+
+  // Extracting IDs of all shows
+  const paths = shows.map((show) => ({
+    params: { id: show.id.toString() },
+  }));
+
   return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: "blocking", //indicates the type of fallback
+    paths,
+    fallback: true,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const id = (parseInt(params.id) || 1).toString();
+  const id = params.id;
 
+  // Fetching data for the specific show using the provided ID
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   const show = await res.json();
+
   return { props: { show } };
 }
 
