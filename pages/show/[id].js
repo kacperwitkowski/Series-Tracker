@@ -157,6 +157,7 @@ const ShowDetails = ({ show }) => {
           <div>
             <div className={styles.showpage__container}>
               <div className={styles.showpage__image__test}>
+                {console.log(show)}
                 {/* <img
                   alt="poster"
                   src={show.image ? show.image.original : "/img/poster.jpg"}
@@ -253,41 +254,18 @@ const ShowDetails = ({ show }) => {
 };
 
 export async function getStaticPaths() {
-  // Fetching the list of all shows here to determine paths
-  const res = await fetch("https://api.tvmaze.com/shows");
-  const shows = await res.json();
-
-  // Extracting IDs of all shows
-  const paths = shows.map((show) => ({
-    params: { id: show.id.toString() },
-  }));
-
   return {
-    paths,
-    fallback: true,
+    paths: [], //indicates that no page needs be created at build time
+    fallback: "blocking", //indicates the type of fallback
   };
 }
 
 export async function getStaticProps({ params }) {
-  const id = params.id;
+  const id = (parseInt(params.id) || 1).toString();
 
-  // Fetching data for the specific show using the provided ID
   const res = await fetch(`https://api.tvmaze.com/shows/${id}`);
   const show = await res.json();
-
   return { props: { show } };
 }
-
-// export async function getServerSideProps(context) {
-//   const [seasonsRes, episodesRes] = await Promise.all([
-//     fetch(`https://api.tvmaze.com/shows/${context.query.id}/seasons`),
-//     fetch(`https://api.tvmaze.com/shows/${context.query.id}/episodes`),
-//   ]);
-//   const [seasons, episodes] = await Promise.all([
-//     seasonsRes.json(),
-//     episodesRes.json(),
-//   ]);
-//   return { props: { seasons, episodes } };
-// }
 
 export default ShowDetails;
