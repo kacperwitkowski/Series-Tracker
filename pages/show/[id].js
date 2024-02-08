@@ -26,39 +26,22 @@ const ShowDetails = ({ show }) => {
   };
 
   //slow version
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const [seasonsRes, episodesRes] = await Promise.all([
-  //       fetch(`https://api.tvmaze.com/shows/${show.id}/seasons`),
-  //       fetch(`https://api.tvmaze.com/shows/${show.id}/episodes`),
-  //     ]);
-  //     const [seasons, episodes] = await Promise.all([
-  //       seasonsRes.json(),
-  //       episodesRes.json(),
-  //     ]);
-
-  //     setSeasons(seasons);
-  //     setEpisodes(episodes);
-  //   };
-  //   getData();
-  // }, [show]);
-
   useEffect(() => {
     const getData = async () => {
-      console.log(show);
-      const getSeasons = await axios.get(
-        `https://api.tvmaze.com/shows/${show.id}/seasons`
-      );
+      const [seasonsRes, episodesRes] = await Promise.all([
+        fetch(`https://api.tvmaze.com/shows/${show.id}/seasons`),
+        fetch(`https://api.tvmaze.com/shows/${show.id}/episodes`),
+      ]);
+      const [seasons, episodes] = await Promise.all([
+        seasonsRes.json(),
+        episodesRes.json(),
+      ]);
 
-      const getEpisodes = await axios.get(
-        `https://api.tvmaze.com/shows/${show.id}/episodes`
-      );
-
-      setSeasons(getSeasons.data);
-      setEpisodes(getEpisodes.data);
+      setSeasons(seasons);
+      setEpisodes(episodes);
     };
     getData();
-  }, []);
+  }, [show.id]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -170,7 +153,6 @@ const ShowDetails = ({ show }) => {
           <div>
             <div className={styles.showpage__container}>
               <div className={styles.showpage__image__test}>
-                {console.log(show)}
                 {/* <img
                   alt="poster"
                   src={show.image ? show.image.original : "/img/poster.jpg"}
@@ -280,17 +262,5 @@ export async function getStaticProps({ params }) {
   const show = await res.json();
   return { props: { show } };
 }
-
-// export async function getServerSideProps(context) {
-//   const [seasonsRes, episodesRes] = await Promise.all([
-//     fetch(`https://api.tvmaze.com/shows/${context.query.id}/seasons`),
-//     fetch(`https://api.tvmaze.com/shows/${context.query.id}/episodes`),
-//   ]);
-//   const [seasons, episodes] = await Promise.all([
-//     seasonsRes.json(),
-//     episodesRes.json(),
-//   ]);
-//   return { props: { seasons, episodes } };
-// }
 
 export default ShowDetails;
