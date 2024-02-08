@@ -9,16 +9,12 @@ body {
 @font-face {
   font-family: "DJGROSS";
   src: url("/fonts/DJGROSS.ttf");
-  font-style: normal;
+    font-style: normal;
 }
 
 .container {
   max-width: 1920px;
   margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 a {
@@ -35,3 +31,5 @@ img {
   height: 295px;
   object-fit: contain;
 }
+
+
